@@ -20,7 +20,7 @@ test_pixel_tensor = tf.placeholder\
 distance = tf.reduce_sum\
            (tf.abs\
             (tf.add(train_pixel_tensor, \
-                    tf.neg(test_pixel_tensor))), \
+                    tf.negative(test_pixel_tensor))), \
             reduction_indices=1)
 
 pred = tf.arg_min(distance, 0)
@@ -35,7 +35,7 @@ with tf.Session() as sess:
         nn_index = sess.run(pred,\
 		feed_dict={train_pixel_tensor:train_pixels,\
 		test_pixel_tensor:test_pixels[i,:]})
-        print "Test N° ", i,"Predicted Class: ", \
+        print "Test Num ", i,"Predicted Class: ", \
 		np.argmax(train_list_values[nn_index]),\
 		"True Class: ", np.argmax(test_list_of_values[i])
         if np.argmax(train_list_values[nn_index])\
